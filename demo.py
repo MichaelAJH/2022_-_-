@@ -10,12 +10,12 @@ class BicycleDataset(torch.utils.data.Dataset):
         self.h5_file = h5py.File(file_path, 'r')
     
     def __getitem__(self, index): 
-        return (self.h5_file)
+        return self.h5_file["data"]["table"][index]
 
     def __len__(self):
         return self.features.shape[0]
         
-training_data = BicycleDataset(path="../DATA/data.csv", chunksize=600, nb_samples=3000)
+training_data = BicycleDataset("../DATA/data.csv")
 test_data = BicycleDataset()
 train_loader = torch.utils.data.DataLoader(training_data, batch_size=64)
 test_loader = torch.utills.data.DataLoader(test_data, batch_size=64)
